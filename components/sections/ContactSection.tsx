@@ -50,18 +50,34 @@ export default function ContactSection() {
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
     
-    // Simulate an API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    console.log("Form data:", data);
-    
-    toast({
-      title: "Message sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
-    });
-    
-    form.reset();
-    setIsSubmitting(false);
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      toast({
+        title: "Message sent!",
+        description: "Thanks for reaching out. I'll get back to you soon.",
+      });
+      
+      form.reset();
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -108,12 +124,12 @@ export default function ContactSection() {
                   <div>
                     <h4 className="font-medium">WhatsApp</h4>
                     <a 
-                      href="https://wa.me/1234567890" 
+                      href="https://wa.me/+971507127683" 
                       className="text-muted-foreground hover:text-primary transition-colors"
                       target="_blank" 
                       rel="noopener noreferrer"
                     >
-                      Send a message
+                      Send a message || +971507127683
                     </a>
                   </div>
                 </div>
