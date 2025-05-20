@@ -65,7 +65,7 @@ export default function ContactSection() {
 
       toast({
         title: "Message sent!",
-        description: "Thanks for reaching out. I'll get back to you soon.",
+        description: "Thanks for reaching out. I&apos;ll get back to you soon.",
       });
       
       form.reset();
@@ -98,6 +98,7 @@ export default function ContactSection() {
               <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
               <p className="text-muted-foreground mb-8">
                 Feel free to reach out for collaborations, job opportunities, or just to say hello! 
+                I&apos;ll do my best to get back to you as soon as possible.
               </p>
               
               <div className="space-y-6">
