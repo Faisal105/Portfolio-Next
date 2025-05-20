@@ -26,7 +26,7 @@ export default function HeroSection() {
     }, delta);
 
     return () => clearInterval(ticker);
-  }, [displayText, isDeleting, currentTitleIndex]);
+  }, [displayText, isDeleting, currentTitleIndex, delta, tick]);
 
   const tick = () => {
     let i = currentTitleIndex % titles.length;
@@ -119,7 +119,7 @@ export default function HeroSection() {
             variants={itemVariants}
             className="text-4xl md:text-6xl font-bold mb-6"
           >
-            Hi, I'm{" "}
+            Hi, I&apos;m{" "}
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               Faisal Bashir
             </span>
@@ -130,7 +130,7 @@ export default function HeroSection() {
             className="text-2xl md:text-4xl font-semibold mb-6 h-[3rem] flex items-center justify-center"
           >
             <div className="flex items-center">
-              <span className="text-muted-foreground">I'm a</span>
+              <span className="text-muted-foreground">I&apos;m a</span>
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent ml-2 inline-block min-w-[280px] text-left">
                 {displayText}
                 <span className="animate-blink ml-[2px] inline-block">|</span>
