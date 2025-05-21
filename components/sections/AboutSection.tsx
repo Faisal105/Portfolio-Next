@@ -87,7 +87,7 @@ export default function AboutSection() {
                   variants={itemVariants}
                   className="text-muted-foreground"
                 >
-                  I'm a passionate developer specializing in building exceptional 
+                  I&apos;m a passionate developer specializing in building exceptional 
                   digital experiences. With expertise in both frontend and backend 
                   technologies, I create robust and scalable applications that deliver 
                   real value to users.
@@ -99,7 +99,7 @@ export default function AboutSection() {
                 >
                   My journey in web development began with a curiosity for creating 
                   interactive interfaces, which evolved into a deep understanding of 
-                  the full development stack. I've worked with diverse teams across 
+                  the full development stack. I&apos;ve worked with diverse teams across 
                   multiple industries, always focused on delivering high-quality code 
                   and exceptional user experiences.
                 </motion.p>
@@ -108,8 +108,8 @@ export default function AboutSection() {
                   variants={itemVariants}
                   className="text-muted-foreground"
                 >
-                  Currently, I'm focused on building accessible, human-centered products 
-                  using modern frameworks and best practices. I'm constantly expanding 
+                  Currently, I&apos;m focused on building accessible, human-centered products 
+                  using modern frameworks and best practices. I&apos;m constantly expanding 
                   my knowledge and staying up-to-date with the latest technologies.
                 </motion.p>
 

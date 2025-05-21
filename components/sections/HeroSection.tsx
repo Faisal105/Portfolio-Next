@@ -21,37 +21,37 @@ export default function HeroSection() {
   const [delta, setDelta] = useState(100); // Faster initial typing speed
 
   useEffect(() => {
+    const tick = () => {
+      let i = currentTitleIndex % titles.length;
+      let fullText = titles[i];
+      let updatedText = isDeleting 
+        ? fullText.substring(0, displayText.length - 1)
+        : fullText.substring(0, displayText.length + 1);
+
+      setDisplayText(updatedText);
+
+      if (isDeleting) {
+        setDelta(30); // Even faster deletion speed
+      }
+
+      if (!isDeleting && updatedText === fullText) {
+        setIsDeleting(true);
+        setDelta(800); // Shorter pause before deleting
+      } else if (isDeleting && updatedText === '') {
+        setIsDeleting(false);
+        setCurrentTitleIndex(prevIndex => prevIndex + 1);
+        setDelta(80); // Faster start for next word
+      } else if (!isDeleting) {
+        setDelta(80); // Consistent typing speed
+      }
+    };
+
     let ticker = setInterval(() => {
       tick();
     }, delta);
 
     return () => clearInterval(ticker);
-  }, [displayText, isDeleting, currentTitleIndex, delta, tick]);
-
-  const tick = () => {
-    let i = currentTitleIndex % titles.length;
-    let fullText = titles[i];
-    let updatedText = isDeleting 
-      ? fullText.substring(0, displayText.length - 1)
-      : fullText.substring(0, displayText.length + 1);
-
-    setDisplayText(updatedText);
-
-    if (isDeleting) {
-      setDelta(30); // Even faster deletion speed
-    }
-
-    if (!isDeleting && updatedText === fullText) {
-      setIsDeleting(true);
-      setDelta(800); // Shorter pause before deleting
-    } else if (isDeleting && updatedText === '') {
-      setIsDeleting(false);
-      setCurrentTitleIndex(prevIndex => prevIndex + 1);
-      setDelta(80); // Faster start for next word
-    } else if (!isDeleting) {
-      setDelta(80); // Consistent typing speed
-    }
-  };
+  }, [displayText, isDeleting, currentTitleIndex, delta]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
