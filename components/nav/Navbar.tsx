@@ -3,18 +3,18 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Home, User, Layers, Briefcase, Award, Folder, Mail } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { name: "Home", href: "/#home" },
-  { name: "About", href: "/#about" },
-  { name: "Skills", href: "/#skills" },
-  { name: "Experience", href: "/#experience" },
-  { name: "Certifications", href: "/#certifications" },
-  { name: "Projects", href: "/#projects" },
-  { name: "Contact", href: "/#contact" },
+  { name: "Home", href: "/#home", icon: <Home className="w-4 h-4 mr-2" /> },
+  { name: "About", href: "/#about", icon: <User className="w-4 h-4 mr-2" /> },
+  { name: "Skills", href: "/#skills", icon: <Layers className="w-4 h-4 mr-2" /> },
+  { name: "Experience", href: "/#experience", icon: <Briefcase className="w-4 h-4 mr-2" /> },
+  { name: "Certifications", href: "/#certifications", icon: <Award className="w-4 h-4 mr-2" /> },
+  { name: "Projects", href: "/#projects", icon: <Folder className="w-4 h-4 mr-2" /> },
+  { name: "Contact", href: "/#contact", icon: <Mail className="w-4 h-4 mr-2" /> },
 ];
 
 export default function Navbar() {
@@ -103,12 +103,13 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`relative group py-2 ${
+                className={`relative group py-2 flex items-center ${
                   activeLink === link.href.replace("/#", "") 
                     ? "text-primary"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
+                {link.icon}
                 {link.name}
                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary/0 via-primary to-primary/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
                 {activeLink === link.href.replace("/#", "") && (
@@ -155,12 +156,13 @@ export default function Navbar() {
                     key={link.name}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className={`relative group py-2 px-4 rounded-lg transition-colors ${
+                    className={`relative group py-2 px-4 rounded-lg transition-colors flex items-center ${
                       activeLink === link.href.replace("/#", "")
                         ? "text-primary bg-primary/10"
                         : "text-muted-foreground hover:text-primary hover:bg-primary/5"
                     }`}
                   >
+                    {link.icon}
                     <span className="relative z-10">{link.name}</span>
                     <motion.span
                       initial={{ scale: 0 }}
