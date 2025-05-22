@@ -25,6 +25,10 @@
   --radius: 0.5rem;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 .dark {
   --background: 240 30% 6%;
   --foreground: 0 0% 100%;
