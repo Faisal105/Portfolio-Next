@@ -104,7 +104,7 @@ export default function ContactSection() {
 
       toast({
         title: "Message sent!",
-        description: "Thanks for reaching out. I'll get back to you soon.",
+        description: "Thanks for reaching out. I&apos;ll get back to you soon.",
       });
 
       form.reset();
@@ -180,8 +180,8 @@ export default function ContactSection() {
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-primary via-secondary to-accent mx-auto mb-4"></div>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Ready to start your next project? Let's work together to create
-              something amazing!
+              Ready to start your next project? Let&apos;s work together to
+              create something amazing!
             </p>
           </motion.div>
 
