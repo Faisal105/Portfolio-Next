@@ -3,18 +3,48 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Home, User, Layers, Briefcase, Award, Folder, Mail } from "lucide-react";
+import {
+  Menu,
+  X,
+  Home,
+  User,
+  Layers,
+  Briefcase,
+  Award,
+  Folder,
+  Mail,
+} from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { name: "Home", href: "/#home", icon: <Home className="w-4 h-4 mr-2" /> },
   { name: "About", href: "/#about", icon: <User className="w-4 h-4 mr-2" /> },
-  { name: "Skills", href: "/#skills", icon: <Layers className="w-4 h-4 mr-2" /> },
-  { name: "Experience", href: "/#experience", icon: <Briefcase className="w-4 h-4 mr-2" /> },
-  { name: "Certifications", href: "/#certifications", icon: <Award className="w-4 h-4 mr-2" /> },
-  { name: "Projects", href: "/#projects", icon: <Folder className="w-4 h-4 mr-2" /> },
-  { name: "Contact", href: "/#contact", icon: <Mail className="w-4 h-4 mr-2" /> },
+  {
+    name: "Skills",
+    href: "/#skills",
+    icon: <Layers className="w-4 h-4 mr-2" />,
+  },
+  {
+    name: "Experience",
+    href: "/#experience",
+    icon: <Briefcase className="w-4 h-4 mr-2" />,
+  },
+  {
+    name: "Certifications",
+    href: "/#certifications",
+    icon: <Award className="w-4 h-4 mr-2" />,
+  },
+  {
+    name: "Projects",
+    href: "/#projects",
+    icon: <Folder className="w-4 h-4 mr-2" />,
+  },
+  {
+    name: "Contact",
+    href: "/#contact",
+    icon: <Mail className="w-4 h-4 mr-2" />,
+  },
 ];
 
 export default function Navbar() {
@@ -32,7 +62,10 @@ export default function Navbar() {
         const sectionHeight = (section as HTMLElement).offsetHeight;
         const sectionId = section.getAttribute("id") || "";
 
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        if (
+          scrollPosition >= sectionTop &&
+          scrollPosition < sectionTop + sectionHeight
+        ) {
           setActiveLink(sectionId);
         }
       });
@@ -46,15 +79,15 @@ export default function Navbar() {
 
   const headerVariants = {
     hidden: { y: -100, opacity: 0 },
-    visible: { 
-      y: 0, 
+    visible: {
+      y: 0,
       opacity: 1,
       transition: {
         type: "spring",
         stiffness: 100,
-        damping: 20
-      }
-    }
+        damping: 20,
+      },
+    },
   };
 
   const mobileMenuVariants = {
@@ -64,8 +97,8 @@ export default function Navbar() {
       transition: {
         type: "spring",
         stiffness: 400,
-        damping: 40
-      }
+        damping: 40,
+      },
     },
     open: {
       opacity: 1,
@@ -73,9 +106,9 @@ export default function Navbar() {
       transition: {
         type: "spring",
         stiffness: 400,
-        damping: 40
-      }
-    }
+        damping: 40,
+      },
+    },
   };
 
   return (
@@ -83,43 +116,74 @@ export default function Navbar() {
       initial="hidden"
       animate="visible"
       variants={headerVariants}
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-md shadow-sm border-b border-primary/10"
+          ? "bg-background/70 backdrop-blur-xl shadow-lg border-b border-primary/20"
           : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 py-4">
         <nav className="flex justify-between items-center">
-          <Link href="/#home" className="font-bold text-xl relative group">
-            <span className="text-primary">Faisal</span>
-            <span>Bashir</span>
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary/60 group-hover:w-full transition-all duration-300"></span>
-          </Link>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Link href="/#home" className="font-bold text-xl relative group">
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                Faisal
+              </span>
+              <span className="ml-1">Bashir</span>
+              <motion.span
+                className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary to-secondary"
+                initial={{ width: 0 }}
+                whileHover={{ width: "100%" }}
+                transition={{ duration: 0.3 }}
+              />
+            </Link>
+          </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
+            {navLinks.map((link, index) => (
+              <motion.div
                 key={link.name}
-                href={link.href}
-                className={`relative group py-2 flex items-center ${
-                  activeLink === link.href.replace("/#", "") 
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.3 }}
+                whileHover={{ scale: 1.05 }}
               >
-                {link.icon}
-                {link.name}
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary/0 via-primary to-primary/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                {activeLink === link.href.replace("/#", "") && (
+                <Link
+                  href={link.href}
+                  className={`relative group py-2 px-3 flex items-center rounded-lg transition-all duration-300 ${
+                    activeLink === link.href.replace("/#", "")
+                      ? "text-primary bg-primary/10"
+                      : "text-muted-foreground hover:text-foreground hover:bg-primary/5"
+                  }`}
+                >
+                  <motion.div
+                    className="mr-2"
+                    whileHover={{ rotate: 5, scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {link.icon}
+                  </motion.div>
+                  {link.name}
                   <motion.span
-                    layoutId="activeSection"
-                    className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary to-primary/60"
-                    transition={{ type: "spring", stiffness: 400, damping: 40 }}
+                    className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary/0 via-primary to-primary/0"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.3 }}
                   />
-                )}
-              </Link>
+                  {activeLink === link.href.replace("/#", "") && (
+                    <motion.span
+                      layoutId="activeSection"
+                      className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary to-secondary"
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 40,
+                      }}
+                    />
+                  )}
+                </Link>
+              </motion.div>
             ))}
             <div className="pl-4 border-l border-primary/20">
               <ThemeToggle />
@@ -129,14 +193,21 @@ export default function Navbar() {
           {/* Mobile Navigation Toggle */}
           <div className="flex items-center gap-4 md:hidden">
             <ThemeToggle />
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </Button>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsOpen(!isOpen)}
+                className="text-foreground hover:bg-primary/10 hover:text-primary transition-all duration-300 rounded-full"
+              >
+                <motion.div
+                  animate={{ rotate: isOpen ? 90 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {isOpen ? <X size={24} /> : <Menu size={24} />}
+                </motion.div>
+              </Button>
+            </motion.div>
           </div>
         </nav>
 
