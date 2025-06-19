@@ -456,7 +456,7 @@ export default function ContactSection() {
       >
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
-            �� {new Date().getFullYear()}{" "}
+            © {new Date().getFullYear()}{" "}
             <span className="text-primary font-medium">Faisal Bashir</span>. All
             rights reserved. Built with ❤️ using Next.js, TypeScript & Framer
             Motion.
